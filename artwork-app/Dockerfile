@@ -1,6 +1,14 @@
-node_modules
-.env
-.env.local
-*.log
-.DS_Store
-.git
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD ["node", "server.js"]
+
