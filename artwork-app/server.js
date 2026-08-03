@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ==== Direktori ====
-const ROOT_DIR = path.join(__dirname, '..');
+const ROOT_DIR = __dirname;
 const DATA_DIR = path.join(__dirname, 'data');
 const ASSETS_DIR = path.join(__dirname, 'assets');
 const AVATAR_DIR = path.join(__dirname, 'assets', 'avatars');
