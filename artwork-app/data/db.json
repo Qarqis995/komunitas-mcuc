@@ -1,0 +1,128 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "FarX",
+      "password": "Grizz220",
+      "display_name": "FarX",
+      "bio": "programmer sekaligus developer web ini",
+      "avatar": "avatar-1785768310994-45672139.jpg",
+      "created_at": "2026-08-01T16:22:27.859Z",
+      "email": null
+    },
+    {
+      "id": 2,
+      "username": "Far",
+      "email": "shaufigafari999@gmail.com",
+      "password": "Grizz220",
+      "display_name": "Far_akun-kedua",
+      "bio": "",
+      "avatar": "avatar-1785769338515-58550602.png",
+      "created_at": "2026-08-03T15:01:07.826Z"
+    },
+    {
+      "id": 3,
+      "username": "Zia",
+      "email": "qarqis824@gmail.com",
+      "password": "Grizz220",
+      "display_name": "Zia",
+      "bio": "",
+      "avatar": null,
+      "created_at": "2026-08-03T15:04:39.381Z"
+    },
+    {
+      "id": 4,
+      "username": "ahmadshaufi995995@gmail.com",
+      "email": "ahmadshaufi995995@gmail.com",
+      "password": "Grizz220",
+      "display_name": "far-acc2",
+      "bio": "",
+      "avatar": null,
+      "created_at": "2026-08-03T19:44:37.336Z"
+    },
+    {
+      "id": 5,
+      "username": "Gublan",
+      "email": "miziilyas21@gmail.com",
+      "password": "1234",
+      "display_name": "Gublan",
+      "bio": "",
+      "avatar": "avatar-1785786518938-974658860.jpg",
+      "created_at": "2026-08-03T19:47:25.620Z"
+    }
+  ],
+  "artworks": [
+    {
+      "id": 2,
+      "user_id": 1,
+      "title": "ucapkan horeeeeee",
+      "description": "",
+      "filenames": [
+        "1785768385396-846894306.jpg"
+      ],
+      "tags": [],
+      "created_at": "2026-08-03T14:46:26.033Z"
+    }
+  ],
+  "reactions": [
+    {
+      "id": 3,
+      "artwork_id": 2,
+      "user_id": 1,
+      "type": "like"
+    },
+    {
+      "id": 4,
+      "artwork_id": 2,
+      "user_id": 5,
+      "type": "like"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "artwork_id": 2,
+      "user_id": 1,
+      "content": "baaaa",
+      "created_at": "2026-08-03T14:46:36.594Z"
+    },
+    {
+      "id": 2,
+      "artwork_id": 2,
+      "user_id": 2,
+      "content": "peler",
+      "created_at": "2026-08-03T15:02:59.401Z"
+    },
+    {
+      "id": 3,
+      "artwork_id": 2,
+      "user_id": 5,
+      "content": "jir",
+      "created_at": "2026-08-03T19:49:25.578Z"
+    }
+  ],
+  "follows": [],
+  "nextId": {
+    "users": 6,
+    "artworks": 3,
+    "reactions": 5,
+    "comments": 4,
+    "follows": 1
+  },
+  "resetCodes": [
+    {
+      "email": "shaufigafari999@gmail.com",
+      "code": "431808",
+      "created_at": "2026-08-03T15:03:24.839Z",
+      "expires_at": "2026-08-03T15:13:24.839Z",
+      "verified": false
+    },
+    {
+      "email": "miziilyas21@gmail.com",
+      "code": "686215",
+      "created_at": "2026-08-03T19:50:39.432Z",
+      "expires_at": "2026-08-03T20:00:39.432Z",
+      "verified": false
+    }
+  ]
+}

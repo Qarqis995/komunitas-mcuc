@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk — Gallery</title>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .login-wrap { width: 100%; max-width: 360px; padding: 0 20px; }
+  .login-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border, #1c2634);
+    border-radius: 18px;
+    padding: 30px 26px;
+  }
+  .login-logo {
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+    margin-bottom: 22px; color: var(--accent-bright); font-weight: 700; font-size: 17px;
+  }
+  .login-logo svg { width: 24px; height: 24px; color: var(--accent); }
+  .login-form { display: flex; flex-direction: column; gap: 12px; }
+  #alertBox, #regAlertBox {
+    display: none;
+    background: rgba(255,56,96,0.12);
+    border: 1px solid rgba(255,56,96,0.4);
+    color: #ff8a9d;
+    font-size: 13px;
+    padding: 9px 12px;
+    border-radius: 8px;
+  }
+  .switch-line { text-align: center; font-size: 13px; color: var(--text-dim); margin-top: 16px; }
+  .switch-line button {
+    background: none; border: none; color: var(--accent-bright);
+    font-weight: 600; font-size: 13px; cursor: pointer; padding: 0;
+  }
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(4,6,10,0.7); align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay[style*="flex"] { display: flex; }
+  .modal-box {
+    background: var(--bg-elevated); border: 1px solid var(--border, #1c2634);
+    border-radius: 18px; width: 100%; max-width: 360px; padding: 26px 24px; position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 14px; right: 14px; background: none; border: none;
+    color: var(--text-dim); cursor: pointer; font-size: 18px;
+  }
+  .back-home { display: block; text-align: center; margin-top: 18px; font-size: 13px; color: var(--text-dim); text-decoration: none; }
+  .back-home:hover { color: var(--accent-bright); }
+</style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo" id="loginLogo"></div>
+      <div id="alertBox"></div>
+      <form class="login-form" id="loginForm">
+        <input type="text" id="username" placeholder="Username" autocomplete="username" required>
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+        <button type="submit" class="btn-primary">Masuk</button>
+      </form>
+      <div class="switch-line">
+        Belum punya akun? <button id="showRegisterBtn">Daftar</button>
+      </div>
+    </div>
+    <a href="/" class="back-home">← Kembali ke Beranda</a>
+  </div>
+
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeRegisterBtn">✕</button>
+      <div class="login-logo" id="registerLogo"></div>
+      <div id="regAlertBox"></div>
+      <form class="login-form" id="registerForm">
+        <input type="text" id="regUsername" placeholder="Username (min. 3 karakter)" required>
+        <input type="password" id="regPassword" placeholder="Password (min. 4 karakter)" required>
+        <button type="submit" class="btn-primary">Daftar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/icons.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>

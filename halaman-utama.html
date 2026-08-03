@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Komunitas Kami</title>
+<meta name="theme-color" content="#0a0e17">
+<link rel="icon" href="/webmaker/icon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #0a0e17;
+    --bg-elevated: #10151f;
+    --bg-card: #121a27;
+    --text: #dbe6f0;
+    --text-dim: #6b7d94;
+    --accent: #00b4ff;
+    --accent-bright: #4fd8ff;
+    --accent-dim: #0a4d6e;
+    --border: #1c2634;
+    --glow: 0 0 0 3px rgba(0,180,255,0.15);
+    --danger: #ff3860;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== Navbar ===== */
+  .navbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(10,14,23,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; color: var(--accent-bright); }
+  .brand svg { width: 24px; height: 24px; color: var(--accent); filter: drop-shadow(0 0 4px rgba(0,180,255,0.6)); }
+
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+  .btn-login {
+    background: var(--accent); color: #04121c; border: none;
+    padding: 9px 18px; border-radius: 10px; font-weight: 700; font-size: 14px;
+    cursor: pointer; transition: .15s;
+  }
+  .btn-login:hover { background: var(--accent-bright); box-shadow: var(--glow); }
+
+  .avatar-btn {
+    width: 38px; height: 38px; min-width: 38px; min-height: 38px;
+    border-radius: 50%; overflow: hidden;
+    border: 1.5px solid var(--accent-dim); background: var(--bg-card);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--accent-bright); font-weight: 700; font-size: 14px;
+    padding: 0; margin: 0; box-sizing: border-box; flex-shrink: 0;
+    -webkit-appearance: none; appearance: none;
+  }
+  .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+
+  /* ===== Hero / Foto Event ===== */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 46vh;
+    min-height: 260px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #0d1420 0%, #0a0e17 100%);
+  }
+  .hero img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.55;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,14,23,0.1) 0%, rgba(10,14,23,0.95) 90%);
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    text-align: center; padding: 0 20px 34px;
+  }
+  .hero-title {
+    font-size: clamp(22px, 5vw, 34px);
+    font-weight: 800;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ===== Sambutan ===== */
+  .welcome {
+    max-width: 720px;
+    margin: 34px auto 10px;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .welcome h2 {
+    font-size: 20px;
+    margin: 0 0 10px;
+    color: var(--accent-bright);
+  }
+  .welcome p {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ===== Menu Navigasi Utama ===== */
+  .menu-grid {
+    max-width: 900px;
+    margin: 34px auto 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .menu-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text);
+    transition: .18s;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .menu-card:hover {
+    border-color: var(--accent-dim);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+  .menu-card .icon-wrap {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--bg-elevated);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .menu-card .icon-wrap svg { width: 26px; height: 26px; }
+  .menu-card h3 { margin: 0; font-size: 15.5px; font-weight: 700; }
+  .menu-card p { margin: 0; font-size: 12.5px; color: var(--text-dim); line-height: 1.4; }
+
+  footer {
+    text-align: center;
+    padding: 24px 20px 40px;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* ===== Modal Overlay (shared) ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(4,6,10,0.7);
+    backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal-box {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    width: 100%; max-width: 380px;
+    padding: 26px 24px 28px;
+    position: relative;
+    animation: pop .18s ease;
+  }
+  @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none; color: var(--text-dim);
+    cursor: pointer; display: flex;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .modal-logo { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 18px; color: var(--accent-bright); font-weight: 700; font-size: 16px; }
+  .modal-logo svg { width: 22px; height: 22px; color: var(--accent); }
+
+  .login-form { display: flex; flex-direction: column; gap: 12px; }
+  .login-form input, .login-form textarea {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .login-form input::placeholder { color: var(--text-dim); }
+  .login-form input:focus, .login-form textarea:focus { outline: none; border-color: var(--accent); box-shadow: var(--glow); }
+
+  .btn-primary {
+    background: var(--accent); color: #04121c; border: none;
+    padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14.5px;
+    cursor: pointer; transition: .15s; margin-top: 4px;
+  }
+  .btn-primary:hover { background: var(--accent-bright); box-shadow: var(--glow); }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+  .btn-secondary {
+    background: transparent; color: var(--text-dim); border: 1px solid var(--border);
+    padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px;
+    cursor: pointer; transition: .15s;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  .modal-alert {
+    display: none;
+    background: rgba(255,56,96,0.12);
+    border: 1px solid rgba(255,56,96,0.4);
+    color: #ff8a9d;
+    font-size: 13px;
+    padding: 9px 12px;
+    border-radius: 8px;
+  }
+
+  .switch-line {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 14px;
+  }
+  .switch-line button {
+    background: none; border: none; color: var(--accent-bright);
+    font-weight: 600; font-size: 13px; cursor: pointer; padding: 0;
+  }
+
+  /* ===== Profile dropdown ===== */
+  .profile-menu {
+    display: none;
+    position: absolute; top: 60px; right: 20px; z-index: 90;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    width: 230px;
+    padding: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .profile-menu.show { display: block; }
+  .profile-menu .p-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 10px 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+  .profile-menu .p-head .av {
+    width: 40px; height: 40px; border-radius: 50%; overflow: hidden;
+    background: var(--bg-card); display: flex; align-items: center; justify-content: center;
+    color: var(--accent-bright); font-weight: 700; flex-shrink: 0;
+  }
+  .profile-menu .p-head .av img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-menu .p-head .names { min-width: 0; }
+  .profile-menu .p-head .dn { font-size: 14px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .profile-menu .p-head .un { font-size: 12px; color: var(--text-dim); }
+
+  .profile-menu button.item {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; background: none; border: none; text-align: left;
+    color: var(--text); font-size: 13.5px; padding: 10px; border-radius: 8px;
+    cursor: pointer;
+  }
+  .profile-menu button.item:hover { background: var(--bg-card); color: var(--accent-bright); }
+  .profile-menu button.item.danger:hover { color: var(--danger); }
+  .profile-menu button.item svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+  /* ===== Edit Profil Modal ===== */
+  .edit-avatar-row { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .edit-avatar-preview {
+    width: 76px; height: 76px; border-radius: 50%; overflow: hidden;
+    background: var(--bg-card); border: 1.5px solid var(--accent-dim);
+    display: flex; align-items: center; justify-content: center; color: var(--accent-bright);
+    font-weight: 700; font-size: 22px; position: relative; cursor: pointer;
+  }
+  .edit-avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .edit-avatar-preview .cam-badge {
+    position: absolute; bottom: -2px; right: -2px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--accent); color: #04121c;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--bg-elevated);
+  }
+  .edit-avatar-preview .cam-badge svg { width: 12px; height: 12px; }
+  .field-label { font-size: 12px; color: var(--text-dim); margin: 6px 0 -4px; }
+
+  /* ===== Crop Modal ===== */
+  .crop-modal-box { max-width: 340px; }
+  .crop-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #05080d;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+  .crop-stage:active { cursor: grabbing; }
+  .crop-stage canvas { position: absolute; top: 0; left: 0; }
+  .crop-circle-overlay {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    box-shadow: 0 0 0 2000px rgba(4,6,10,0.55);
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+  .crop-zoom-row {
+    display: flex; align-items: center; gap: 10px;
+    margin: 16px 0 4px;
+    color: var(--text-dim);
+  }
+  .crop-zoom-row input[type="range"] {
+    flex: 1;
+    accent-color: var(--accent);
+  }
+  .crop-actions {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <header class="navbar">
+    <a href="/" class="brand">
+      <svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="11" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="14" x2="12" y2="16.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Komunitas Kami</span>
+    </a>
+    <div class="nav-right" id="navRight">
+      <button class="btn-login" id="openLoginBtn">Masuk</button>
+    </div>
+  </header>
+
+  <!-- Dropdown profil (muncul kalau sudah login) -->
+  <div class="profile-menu" id="profileMenu">
+    <div class="p-head">
+      <div class="av" id="pmAvatar">?</div>
+      <div class="names">
+        <div class="dn" id="pmDisplayName">-</div>
+        <div class="un" id="pmUsername">@-</div>
+      </div>
+    </div>
+    <button class="item" id="pmEditProfile">
+      <svg viewBox="0 0 24 24"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      Edit Profil
+    </button>
+    <button class="item" id="pmGallery">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+      Buka Galeri Karya
+    </button>
+    <button class="item danger" id="pmLogout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 17 21 12 16 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="21" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Keluar
+    </button>
+  </div>
+
+  <!-- ===== Hero / Foto Event ===== -->
+  <section class="hero">
+    <img src="/site-assets/foto-event.jpg" alt="Foto Event Komunitas" id="heroImg"
+         onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='flex';">
+    <div class="hero-overlay">
+      <h1 class="hero-title">Selamat Datang di Komunitas Kami</h1>
+      <p class="hero-sub">Tempat berkumpulnya kreator, seniman, dan siapa saja yang ingin berkarya bersama.</p>
+    </div>
+  </section>
+
+  <!-- ===== Sambutan ===== -->
+  <section class="welcome">
+    <h2>Sambutan</h2>
+    <p>
+      Halo, selamat datang! Komunitas ini adalah ruang untuk berbagi karya, belajar bareng,
+      dan terhubung dengan sesama anggota. Yuk mulai jelajahi — kenali komunitas kami,
+      unggah karyamu, atau coba bikin website sendiri lewat Web Creator.
+    </p>
+  </section>
+
+  <!-- ===== Menu Navigasi Utama ===== -->
+  <section class="menu-grid">
+    <a href="/tentang" class="menu-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M16 8.5a2.7 2.7 0 1 0 0-5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M15.5 14.7c2.7.4 4.5 2.3 4.5 5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Tentang Komunitas</h3>
+      <p>Kenali lebih dekat siapa kami dan apa saja yang kami lakukan.</p>
+    </a>
+
+    <a href="/gallery" class="menu-card" id="uploadKaryaLink">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="14" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <h3>Upload Karya</h3>
+      <p>Bagikan karyamu ke galeri dan dapatkan tanggapan dari komunitas.</p>
+    </a>
+    <!-- Kalau belum login, klik ini membuka pop-up login (bukan pindah halaman dulu) -->
+
+    <a href="/webmaker" class="menu-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="1.7"/><circle cx="6.5" cy="6.5" r=".8" fill="currentColor"/><circle cx="9" cy="6.5" r=".8" fill="currentColor"/></svg>
+      </div>
+      <h3>Buat Web</h3>
+      <p>Rancang website sendiri dengan Web Creator, langsung dari browser.</p>
+    </a>
+
+    <a href="/deteksi-malware" class="menu-card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 9-7 10-4-1-7-5-7-10V6l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Deteksi Malware</h3>
+      <p>Cek keamanan file sebelum dibuka — powered by VirusTotal & lainnya.</p>
+    </a>
+  </section>
+
+  <footer>© <span id="year"></span> Komunitas Kami</footer>
+
+  <!-- ===== Modal: Login ===== -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeLoginBtn">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="11" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Masuk</span>
+      </div>
+      <div class="modal-alert" id="loginAlert"></div>
+      <form class="login-form" id="loginForm">
+        <input type="text" id="loginUsername" placeholder="Username" autocomplete="username" required>
+        <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password" required>
+        <button type="submit" class="btn-primary" id="loginSubmitBtn">Masuk</button>
+      </form>
+      <div class="switch-line" style="margin-top:10px;">
+        <button id="toForgotPasswordBtn">Lupa password?</button>
+      </div>
+      <div class="switch-line">
+        Belum punya akun? <button id="toRegisterBtn">Daftar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Register ===== -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeRegisterBtn">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="11" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Daftar Akun</span>
+      </div>
+      <div class="modal-alert" id="registerAlert"></div>
+      <form class="login-form" id="registerForm">
+        <input type="text" id="regUsername" placeholder="Username (min. 3 karakter)" autocomplete="username" required>
+        <input type="email" id="regEmail" placeholder="Email aktif" autocomplete="email" required>
+        <input type="password" id="regPassword" placeholder="Password (min. 4 karakter)" autocomplete="new-password" required>
+        <button type="submit" class="btn-primary" id="registerSubmitBtn">Daftar</button>
+      </form>
+      <div class="switch-line">
+        Sudah punya akun? <button id="toLoginBtn">Masuk</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Lupa Password (3 tahap) ===== -->
+  <div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeForgotBtn">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-logo">
+        <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+        <span>Lupa Password</span>
+      </div>
+      <div class="modal-alert" id="forgotAlert"></div>
+
+      <!-- Tahap 1: masukkan email -->
+      <div id="forgotStep1">
+        <p style="font-size:13px; color:var(--text-dim); margin:0 0 14px; text-align:center;">
+          Masukkan email yang terdaftar. Kami akan mengirim kode 6 digit ke email tersebut.
+        </p>
+        <form class="login-form" id="forgotStep1Form">
+          <input type="email" id="forgotEmail" placeholder="Email terdaftar" autocomplete="email" required>
+          <button type="submit" class="btn-primary" id="forgotStep1Btn">Kirim Kode</button>
+        </form>
+      </div>
+
+      <!-- Tahap 2: masukkan kode 6 digit -->
+      <div id="forgotStep2" style="display:none;">
+        <p style="font-size:13px; color:var(--text-dim); margin:0 0 14px; text-align:center;">
+          Kode 6 digit sudah dikirim ke <strong id="forgotEmailDisplay" style="color:var(--text);"></strong>.
+          Berlaku 10 menit.
+        </p>
+        <form class="login-form" id="forgotStep2Form">
+          <input type="text" id="forgotCode" placeholder="Kode 6 digit" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required style="text-align:center; letter-spacing:6px; font-size:18px; font-weight:700;">
+          <button type="submit" class="btn-primary" id="forgotStep2Btn">Verifikasi Kode</button>
+          <button type="button" class="btn-secondary" id="forgotResendBtn">Kirim Ulang Kode</button>
+        </form>
+      </div>
+
+      <!-- Tahap 3: password baru -->
+      <div id="forgotStep3" style="display:none;">
+        <p style="font-size:13px; color:var(--text-dim); margin:0 0 14px; text-align:center;">
+          Kode terverifikasi. Silakan buat password baru.
+        </p>
+        <form class="login-form" id="forgotStep3Form">
+          <input type="password" id="forgotNewPassword" placeholder="Password baru (min. 4 karakter)" autocomplete="new-password" required>
+          <button type="submit" class="btn-primary" id="forgotStep3Btn">Simpan Password Baru</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Edit Profil ===== -->
+  <!-- ===== Modal: Crop Foto Profil (1:1) ===== -->
+  <div class="modal-overlay" id="cropModal">
+    <div class="modal-box crop-modal-box">
+      <button class="modal-close" id="closeCropBtn">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-logo">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 4v5H4M15 20v-5h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span>Atur Foto Profil</span>
+      </div>
+      <p style="font-size:12.5px; color:var(--text-dim); text-align:center; margin:-6px 0 14px;">
+        Geser untuk memindahkan, gunakan slider untuk memperbesar/perkecil area foto.
+      </p>
+
+      <div class="crop-stage" id="cropStage">
+        <canvas id="cropCanvas"></canvas>
+        <div class="crop-circle-overlay"></div>
+      </div>
+
+      <div class="crop-zoom-row">
+        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="15" y1="15" x2="20" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <input type="range" id="cropZoomSlider" min="100" max="300" value="100">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="16" y1="16" x2="21" y2="21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="7" y1="10" x2="13" y2="10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="10" y1="7" x2="10" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="crop-actions">
+        <button type="button" class="btn-primary" id="cropConfirmBtn">Gunakan Foto Ini</button>
+        <button type="button" class="btn-secondary" id="cropCancelBtn">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeEditProfileBtn">
+        <svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-logo">
+        <svg viewBox="0 0 24 24"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Edit Profil</span>
+      </div>
+      <div class="modal-alert" id="editProfileAlert"></div>
+
+      <div class="edit-avatar-row">
+        <label class="edit-avatar-preview" id="editAvatarPreview" title="Klik untuk ganti foto">
+          <span id="editAvatarInitial">?</span>
+          <img id="editAvatarImg" style="display:none;">
+          <span class="cam-badge">
+            <svg viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="14" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </span>
+          <input type="file" id="avatarFileInput" accept="image/*" style="display:none;">
+        </label>
+      </div>
+
+      <form class="login-form" id="editProfileForm">
+        <div class="field-label">Nama Tampilan</div>
+        <input type="text" id="editDisplayName" placeholder="Nama tampilan" maxlength="50">
+        <div class="field-label">Bio</div>
+        <textarea id="editBio" rows="3" placeholder="Ceritakan sedikit tentang dirimu..." maxlength="150"></textarea>
+        <button type="submit" class="btn-primary" id="editProfileSubmitBtn">Simpan Perubahan</button>
+        <button type="button" class="btn-secondary" id="cancelEditProfileBtn">Batal</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Elemen ====
+    const navRight = document.getElementById('navRight');
+    const profileMenu = document.getElementById('profileMenu');
+
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    const editProfileModal = document.getElementById('editProfileModal');
+
+    const openLoginBtn = document.getElementById('openLoginBtn');
+    const closeLoginBtn = document.getElementById('closeLoginBtn');
+    const closeRegisterBtn = document.getElementById('closeRegisterBtn');
+    const closeEditProfileBtn = document.getElementById('closeEditProfileBtn');
+    const cancelEditProfileBtn = document.getElementById('cancelEditProfileBtn');
+
+    const toRegisterBtn = document.getElementById('toRegisterBtn');
+    const toLoginBtn = document.getElementById('toLoginBtn');
+
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const editProfileForm = document.getElementById('editProfileForm');
+
+    const loginAlert = document.getElementById('loginAlert');
+    const registerAlert = document.getElementById('registerAlert');
+    const editProfileAlert = document.getElementById('editProfileAlert');
+
+    let currentUser = null;
+    let redirectAfterLogin = null;
+
+    function showModal(modal) { modal.classList.add('show'); }
+    function hideModal(modal) { modal.classList.remove('show'); }
+    function showAlert(box, msg) { box.textContent = msg; box.style.display = 'block'; }
+    function hideAlert(box) { box.style.display = 'none'; }
+
+    // ===== Buka / tutup modal =====
+    openLoginBtn.addEventListener('click', () => { hideAlert(loginAlert); showModal(loginModal); });
+    closeLoginBtn.addEventListener('click', () => hideModal(loginModal));
+    closeRegisterBtn.addEventListener('click', () => hideModal(registerModal));
+    closeEditProfileBtn.addEventListener('click', () => hideModal(editProfileModal));
+    cancelEditProfileBtn.addEventListener('click', () => hideModal(editProfileModal));
+
+    toRegisterBtn.addEventListener('click', () => { hideModal(loginModal); hideAlert(registerAlert); showModal(registerModal); });
+    toLoginBtn.addEventListener('click', () => { hideModal(registerModal); hideAlert(loginAlert); showModal(loginModal); });
+
+    [loginModal, registerModal, editProfileModal].forEach(m => {
+      m.addEventListener('click', (e) => { if (e.target === m) hideModal(m); });
+    });
+
+    // ===== Cek status login =====
+    async function checkSession() {
+      try {
+        const res = await fetch('/api/me');
+        const data = await res.json();
+        currentUser = data.user;
+        renderNav();
+      } catch (err) {
+        console.error('Gagal cek sesi:', err);
+      }
+    }
+
+    function initials(name) {
+      return (name || '?').trim().charAt(0).toUpperCase();
+    }
+
+    function renderNav() {
+      if (currentUser) {
+        navRight.innerHTML = `
+          <button class="avatar-btn" id="avatarToggleBtn">
+            ${currentUser.avatar
+              ? `<img src="/assets/avatars/${currentUser.avatar}" alt="avatar">`
+              : initials(currentUser.display_name)}
+          </button>`;
+        document.getElementById('avatarToggleBtn').addEventListener('click', toggleProfileMenu);
+
+        document.getElementById('pmAvatar').innerHTML = currentUser.avatar
+          ? `<img src="/assets/avatars/${currentUser.avatar}" alt="avatar">`
+          : initials(currentUser.display_name);
+        document.getElementById('pmDisplayName').textContent = currentUser.display_name;
+        document.getElementById('pmUsername').textContent = '@' + currentUser.username;
+      } else {
+        navRight.innerHTML = `<button class="btn-login" id="openLoginBtn">Masuk</button>`;
+        document.getElementById('openLoginBtn').addEventListener('click', () => { hideAlert(loginAlert); showModal(loginModal); });
+        profileMenu.classList.remove('show');
+      }
+    }
+
+    function toggleProfileMenu(e) {
+      e.stopPropagation();
+      profileMenu.classList.toggle('show');
+    }
+    document.addEventListener('click', (e) => {
+      if (!profileMenu.contains(e.target) && e.target.id !== 'avatarToggleBtn') {
+        profileMenu.classList.remove('show');
+      }
+    });
+
+    // ===== Submit Login =====
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert(loginAlert);
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginSubmitBtn');
+      btn.disabled = true; btn.textContent = 'Memproses...';
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(loginAlert, data.error || 'Gagal masuk'); return; }
+        currentUser = data.user;
+        hideModal(loginModal);
+        loginForm.reset();
+        renderNav();
+        if (redirectAfterLogin) {
+          window.location.href = redirectAfterLogin;
+        }
+      } catch (err) {
+        showAlert(loginAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Masuk';
+      }
+    });
+
+    // ===== Submit Register =====
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert(registerAlert);
+      const username = document.getElementById('regUsername').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const btn = document.getElementById('registerSubmitBtn');
+      btn.disabled = true; btn.textContent = 'Memproses...';
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(registerAlert, data.error || 'Gagal mendaftar'); return; }
+        currentUser = data.user;
+        hideModal(registerModal);
+        registerForm.reset();
+        renderNav();
+        if (redirectAfterLogin) {
+          window.location.href = redirectAfterLogin;
+        }
+      } catch (err) {
+        showAlert(registerAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Daftar';
+      }
+    });
+
+    // ===== Menu dropdown: Edit Profil / Galeri / Logout =====
+    document.getElementById('pmEditProfile').addEventListener('click', async () => {
+      profileMenu.classList.remove('show');
+      hideAlert(editProfileAlert);
+      // ambil data terbaru (bio, display_name, avatar) sebelum buka form
+      try {
+        const res = await fetch('/api/me');
+        const data = await res.json();
+        currentUser = data.user;
+      } catch (err) { /* pakai data lama jika gagal */ }
+
+      document.getElementById('editDisplayName').value = currentUser.display_name || '';
+      document.getElementById('editBio').value = currentUser.bio || '';
+      const initialEl = document.getElementById('editAvatarInitial');
+      const imgEl = document.getElementById('editAvatarImg');
+      if (currentUser.avatar) {
+        imgEl.src = '/assets/avatars/' + currentUser.avatar;
+        imgEl.style.display = 'block';
+        initialEl.style.display = 'none';
+      } else {
+        imgEl.style.display = 'none';
+        initialEl.style.display = 'block';
+        initialEl.textContent = initials(currentUser.display_name);
+      }
+      showModal(editProfileModal);
+    });
+
+    document.getElementById('pmGallery').addEventListener('click', () => {
+      window.location.href = '/gallery';
+    });
+
+    document.getElementById('pmLogout').addEventListener('click', async () => {
+      profileMenu.classList.remove('show');
+      try {
+        await fetch('/api/logout', { method: 'POST' });
+      } catch (err) { /* abaikan */ }
+      currentUser = null;
+      renderNav();
+    });
+
+    // ===== Edit Profil: pilih foto -> buka cropper 1:1 -> upload hasil crop =====
+    const editAvatarPreview = document.getElementById('editAvatarPreview');
+    const avatarFileInput = document.getElementById('avatarFileInput');
+    editAvatarPreview.addEventListener('click', () => avatarFileInput.click());
+
+    avatarFileInput.addEventListener('change', () => {
+      const file = avatarFileInput.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showAlert(editProfileAlert, 'File harus berupa gambar');
+        return;
+      }
+      openCropper(file);
+      avatarFileInput.value = ''; // reset supaya bisa pilih file yang sama lagi nanti
+    });
+
+    // ===== Cropper 1:1 (Canvas API, tanpa library eksternal) =====
+    const cropModal = document.getElementById('cropModal');
+    const cropStage = document.getElementById('cropStage');
+    const cropCanvas = document.getElementById('cropCanvas');
+    const cropCtx = cropCanvas.getContext('2d');
+    const cropZoomSlider = document.getElementById('cropZoomSlider');
+
+    let cropImage = null;      // objek Image yang sedang di-crop
+    let cropStageSize = 0;     // ukuran kotak crop (px, persegi)
+    let cropScale = 1;         // skala tampilan dasar (biar gambar penuhi stage minimal)
+    let cropZoom = 1;          // faktor zoom tambahan dari slider (1 - 3)
+    let cropOffsetX = 0;       // offset posisi gambar (px, dalam koordinat stage)
+    let cropOffsetY = 0;
+    let cropDragging = false;
+    let cropDragStartX = 0, cropDragStartY = 0;
+    let cropOffsetStartX = 0, cropOffsetStartY = 0;
+
+    function openCropper(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          cropImage = img;
+          hideModal(editProfileModal);
+          showModal(cropModal);
+          initCropStage();
+        };
+        img.onerror = () => {
+          showAlert(editProfileAlert, 'Gagal membaca file gambar');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function initCropStage() {
+      // ukuran stage mengikuti lebar box modal (persegi)
+      cropStageSize = cropStage.clientWidth || 280;
+      cropCanvas.width = cropStageSize;
+      cropCanvas.height = cropStageSize;
+
+      // skala dasar: gambar harus menutupi seluruh stage (cover), sisi terpendek jadi acuan
+      const iw = cropImage.naturalWidth, ih = cropImage.naturalHeight;
+      cropScale = Math.max(cropStageSize / iw, cropStageSize / ih);
+      cropZoom = 1;
+      cropZoomSlider.value = 100;
+
+      // posisikan gambar di tengah stage
+      cropOffsetX = (cropStageSize - iw * cropScale) / 2;
+      cropOffsetY = (cropStageSize - ih * cropScale) / 2;
+
+      drawCrop();
+    }
+
+    function clampCropOffset() {
+      const iw = cropImage.naturalWidth, ih = cropImage.naturalHeight;
+      const scale = cropScale * cropZoom;
+      const drawW = iw * scale, drawH = ih * scale;
+      // Gambar tidak boleh menyisakan celah kosong di stage
+      const minX = cropStageSize - drawW, maxX = 0;
+      const minY = cropStageSize - drawH, maxY = 0;
+      cropOffsetX = Math.min(maxX, Math.max(minX, cropOffsetX));
+      cropOffsetY = Math.min(maxY, Math.max(minY, cropOffsetY));
+    }
+
+    function drawCrop() {
+      if (!cropImage) return;
+      clampCropOffset();
+      const scale = cropScale * cropZoom;
+      cropCtx.clearRect(0, 0, cropStageSize, cropStageSize);
+      cropCtx.drawImage(
+        cropImage, 0, 0, cropImage.naturalWidth, cropImage.naturalHeight,
+        cropOffsetX, cropOffsetY,
+        cropImage.naturalWidth * scale, cropImage.naturalHeight * scale
+      );
+    }
+
+    // Drag dengan mouse
+    cropStage.addEventListener('mousedown', (e) => {
+      cropDragging = true;
+      cropDragStartX = e.clientX; cropDragStartY = e.clientY;
+      cropOffsetStartX = cropOffsetX; cropOffsetStartY = cropOffsetY;
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!cropDragging) return;
+      cropOffsetX = cropOffsetStartX + (e.clientX - cropDragStartX);
+      cropOffsetY = cropOffsetStartY + (e.clientY - cropDragStartY);
+      drawCrop();
+    });
+    window.addEventListener('mouseup', () => { cropDragging = false; });
+
+    // Drag dengan sentuhan (mobile)
+    cropStage.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      cropDragging = true;
+      cropDragStartX = e.touches[0].clientX; cropDragStartY = e.touches[0].clientY;
+      cropOffsetStartX = cropOffsetX; cropOffsetStartY = cropOffsetY;
+    }, { passive: true });
+    cropStage.addEventListener('touchmove', (e) => {
+      if (!cropDragging || e.touches.length !== 1) return;
+      cropOffsetX = cropOffsetStartX + (e.touches[0].clientX - cropDragStartX);
+      cropOffsetY = cropOffsetStartY + (e.touches[0].clientY - cropDragStartY);
+      drawCrop();
+    }, { passive: true });
+    cropStage.addEventListener('touchend', () => { cropDragging = false; });
+
+    // Zoom lewat slider
+    cropZoomSlider.addEventListener('input', () => {
+      cropZoom = Number(cropZoomSlider.value) / 100;
+      drawCrop();
+    });
+
+    // Zoom lewat scroll wheel (desktop)
+    cropStage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -5 : 5;
+      const newVal = Math.min(300, Math.max(100, Number(cropZoomSlider.value) + delta));
+      cropZoomSlider.value = newVal;
+      cropZoom = newVal / 100;
+      drawCrop();
+    }, { passive: false });
+
+    function closeCropper() {
+      hideModal(cropModal);
+      cropImage = null;
+    }
+    document.getElementById('closeCropBtn').addEventListener('click', () => {
+      closeCropper();
+      showModal(editProfileModal);
+    });
+    document.getElementById('cropCancelBtn').addEventListener('click', () => {
+      closeCropper();
+      showModal(editProfileModal);
+    });
+
+    // Konfirmasi crop -> export jadi blob persegi 1:1 -> upload
+    document.getElementById('cropConfirmBtn').addEventListener('click', async () => {
+      const OUTPUT_SIZE = 512; // ukuran akhir foto profil, persegi
+      const outCanvas = document.createElement('canvas');
+      outCanvas.width = OUTPUT_SIZE;
+      outCanvas.height = OUTPUT_SIZE;
+      const outCtx = outCanvas.getContext('2d');
+      // Scale dari ukuran stage ke ukuran output akhir
+      const ratio = OUTPUT_SIZE / cropStageSize;
+      outCtx.drawImage(cropCanvas, 0, 0, cropStageSize, cropStageSize, 0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
+
+      outCanvas.toBlob(async (blob) => {
+        if (!blob) {
+          showAlert(editProfileAlert, 'Gagal memproses gambar');
+          return;
+        }
+        const confirmBtn = document.getElementById('cropConfirmBtn');
+        confirmBtn.disabled = true; confirmBtn.textContent = 'Mengunggah...';
+        try {
+          const formData = new FormData();
+          formData.append('avatar', blob, 'avatar.jpg');
+          const res = await fetch('/api/profile/avatar', { method: 'POST', body: formData });
+          const data = await res.json();
+          if (!res.ok) {
+            closeCropper();
+            showModal(editProfileModal);
+            showAlert(editProfileAlert, data.error || 'Gagal unggah foto profil');
+            return;
+          }
+          currentUser = data.user;
+          const imgEl = document.getElementById('editAvatarImg');
+          const initialEl = document.getElementById('editAvatarInitial');
+          imgEl.src = '/assets/avatars/' + currentUser.avatar + '?t=' + Date.now();
+          imgEl.style.display = 'block';
+          initialEl.style.display = 'none';
+          renderNav();
+          closeCropper();
+          showModal(editProfileModal);
+        } catch (err) {
+          closeCropper();
+          showModal(editProfileModal);
+          showAlert(editProfileAlert, 'Terjadi kesalahan koneksi saat unggah foto');
+        } finally {
+          confirmBtn.disabled = false; confirmBtn.textContent = 'Gunakan Foto Ini';
+        }
+      }, 'image/jpeg', 0.9);
+    });
+
+    // ===== Edit Profil: simpan nama & bio =====
+    editProfileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert(editProfileAlert);
+      const display_name = document.getElementById('editDisplayName').value;
+      const bio = document.getElementById('editBio').value;
+      const btn = document.getElementById('editProfileSubmitBtn');
+      btn.disabled = true; btn.textContent = 'Menyimpan...';
+      try {
+        const res = await fetch('/api/profile', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ display_name, bio })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(editProfileAlert, data.error || 'Gagal menyimpan perubahan'); return; }
+        currentUser = { ...currentUser, ...data.user };
+        renderNav();
+        hideModal(editProfileModal);
+      } catch (err) {
+        showAlert(editProfileAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Simpan Perubahan';
+      }
+    });
+
+    document.getElementById('uploadKaryaLink').addEventListener('click', (e) => {
+      if (!currentUser) {
+        e.preventDefault();
+        redirectAfterLogin = '/gallery';
+        hideAlert(loginAlert);
+        showModal(loginModal);
+      }
+      // kalau sudah login, biarkan link jalan normal ke /gallery
+    });
+
+    // ===== Lupa Password (3 tahap) =====
+    const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+    const forgotAlert = document.getElementById('forgotAlert');
+    const forgotStep1 = document.getElementById('forgotStep1');
+    const forgotStep2 = document.getElementById('forgotStep2');
+    const forgotStep3 = document.getElementById('forgotStep3');
+    let forgotEmailValue = '';
+    let forgotCodeValue = '';
+
+    function resetForgotFlow() {
+      forgotStep1.style.display = 'block';
+      forgotStep2.style.display = 'none';
+      forgotStep3.style.display = 'none';
+      hideAlert(forgotAlert);
+      document.getElementById('forgotStep1Form').reset();
+      document.getElementById('forgotStep2Form').reset();
+      document.getElementById('forgotStep3Form').reset();
+      forgotEmailValue = '';
+      forgotCodeValue = '';
+    }
+
+    document.getElementById('toForgotPasswordBtn').addEventListener('click', () => {
+      hideModal(loginModal);
+      resetForgotFlow();
+      showModal(forgotPasswordModal);
+    });
+    document.getElementById('closeForgotBtn').addEventListener('click', () => hideModal(forgotPasswordModal));
+    forgotPasswordModal.addEventListener('click', (e) => { if (e.target === forgotPasswordModal) hideModal(forgotPasswordModal); });
+
+    // Tahap 1: kirim kode ke email
+    document.getElementById('forgotStep1Form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert(forgotAlert);
+      const email = document.getElementById('forgotEmail').value.trim();
+      const btn = document.getElementById('forgotStep1Btn');
+      btn.disabled = true; btn.textContent = 'Mengirim...';
+      try {
+        const res = await fetch('/api/forgot-password/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(forgotAlert, data.error || 'Gagal mengirim kode'); return; }
+        forgotEmailValue = email;
+        document.getElementById('forgotEmailDisplay').textContent = email;
+        forgotStep1.style.display = 'none';
+        forgotStep2.style.display = 'block';
+      } catch (err) {
+        showAlert(forgotAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Kirim Kode';
+      }
+    });
+
+    // Tahap 2: verifikasi kode 6 digit
+    document.getElementById('forgotStep2Form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert(forgotAlert);
+      const code = document.getElementById('forgotCode').value.trim();
+      const btn = document.getElementById('forgotStep2Btn');
+      btn.disabled = true; btn.textContent = 'Memverifikasi...';
+      try {
+        const res = await fetch('/api/forgot-password/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: forgotEmailValue, code })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(forgotAlert, data.error || 'Kode salah'); return; }
+        forgotCodeValue = code;
+        forgotStep2.style.display = 'none';
+        forgotStep3.style.display = 'block';
+      } catch (err) {
+        showAlert(forgotAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Verifikasi Kode';
+      }
+    });
+
+    // Kirim ulang kode
+    document.getElementById('forgotResendBtn').addEventListener('click', async () => {
+      hideAlert(forgotAlert);
+      const btn = document.getElementById('forgotResendBtn');
+      btn.disabled = true; btn.textContent = 'Mengirim ulang...';
+      try {
+        const res = await fetch('/api/forgot-password/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: forgotEmailValue })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(forgotAlert, data.error || 'Gagal mengirim ulang kode'); return; }
+        showAlert(forgotAlert, 'Kode baru sudah dikirim.');
+        forgotAlert.style.background = 'rgba(0,255,136,0.1)';
+        forgotAlert.style.borderColor = 'rgba(0,255,136,0.3)';
+        forgotAlert.style.color = '#7CFFB2';
+      } catch (err) {
+        showAlert(forgotAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Kirim Ulang Kode';
+      }
+    });
+
+    // Tahap 3: set password baru
+    document.getElementById('forgotStep3Form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert(forgotAlert);
+      const newPassword = document.getElementById('forgotNewPassword').value;
+      const btn = document.getElementById('forgotStep3Btn');
+      btn.disabled = true; btn.textContent = 'Menyimpan...';
+      try {
+        const res = await fetch('/api/forgot-password/reset', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: forgotEmailValue, code: forgotCodeValue, newPassword })
+        });
+        const data = await res.json();
+        if (!res.ok) { showAlert(forgotAlert, data.error || 'Gagal menyimpan password'); return; }
+        hideModal(forgotPasswordModal);
+        resetForgotFlow();
+        hideAlert(loginAlert);
+        showModal(loginModal);
+        showAlert(loginAlert, 'Password berhasil diubah. Silakan masuk dengan password baru.');
+        loginAlert.style.background = 'rgba(0,255,136,0.1)';
+        loginAlert.style.borderColor = 'rgba(0,255,136,0.3)';
+        loginAlert.style.color = '#7CFFB2';
+      } catch (err) {
+        showAlert(forgotAlert, 'Terjadi kesalahan koneksi');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Simpan Password Baru';
+      }
+    });
+
+    checkSession();
+  </script>
+</body>
+</html>

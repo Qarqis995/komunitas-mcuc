@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar baris 1: logo, plus, nama user, profil -->
+  <header class="navbar">
+    <div class="navbar-row navbar-row-top">
+      <a href="/" class="brand-logo small" id="iconLogo"></a>
+      <div class="nav-actions">
+        <button id="uploadBtn" class="icon-btn" title="Upload karya" id="iconPlus"></button>
+        <span id="navUsername" class="nav-username"></span>
+        <button id="profileBtn" class="avatar-btn" title="Profil">
+          <img id="navAvatarImg" class="nav-avatar-img" style="display:none;">
+          <span id="navAvatarFallback" class="nav-avatar-fallback"></span>
+        </button>
+      </div>
+    </div>
+    <div class="navbar-row navbar-row-search">
+      <div class="search-box">
+        <span class="search-icon" id="iconSearch"></span>
+        <input type="text" id="searchInput" placeholder="Cari karya atau username...">
+      </div>
+    </div>
+    <div class="navbar-row search-tabs" id="searchTabs" style="display:none;">
+      <button class="search-tab active" data-tab="artworks">Karya</button>
+      <button class="search-tab" data-tab="users">Akun</button>
+    </div>
+    <div class="navbar-row" id="tagFilterRow"></div>
+  </header>
+
+  <main class="feed-container" id="feedContainer">
+    <!-- Artwork cards akan dirender di sini -->
+  </main>
+
+  <!-- Hasil pencarian user -->
+  <main class="feed-container" id="userResultsContainer" style="display:none;">
+    <!-- List akun hasil pencarian akan dirender di sini -->
+  </main>
+
+  <!-- Modal Upload -->
+  <div id="uploadModal" class="modal-overlay" style="display:none;">
+    <div class="upload-card">
+      <div class="upload-header">
+        <h2>Bagikan Karya</h2>
+        <button id="closeUploadBtn" class="close-btn"></button>
+      </div>
+      <form id="uploadForm">
+        <div class="file-drop" id="fileDrop">
+          <input type="file" id="imageInput" accept="image/*" multiple>
+          <div id="previewArea">
+            <div id="cameraIconWrap"></div>
+            <span>Klik atau seret gambar ke sini (maks. 5)</span>
+          </div>
+        </div>
+        <div id="imageThumbStrip" class="image-thumb-strip" style="display:none;"></div>
+
+        <input type="text" id="titleInput" placeholder="Judul karya" required maxlength="100">
+        <textarea id="descInput" placeholder="Deskripsi (opsional)" rows="3" maxlength="500"></textarea>
+
+        <div class="field-label" style="margin:4px 0 -2px;">Kategori (pilih hingga 5)</div>
+        <div id="tagPicker" class="tag-picker"></div>
+
+        <div id="uploadProgressWrap" class="upload-progress-wrap" style="display:none;">
+          <div class="upload-progress-track"><div class="upload-progress-fill" id="uploadProgressFill"></div></div>
+          <span id="uploadProgressLabel">0%</span>
+        </div>
+
+        <button type="submit" class="btn-primary" id="uploadSubmitBtn">Bagikan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Komentar -->
+  <div id="commentModal" class="modal-overlay" style="display:none;">
+    <div class="comment-card">
+      <div class="upload-header">
+        <h2>Komentar</h2>
+        <button id="closeCommentBtn" class="close-btn"></button>
+      </div>
+      <div id="commentList" class="comment-list"></div>
+      <form id="commentForm" class="comment-form">
+        <input type="text" id="commentInput" placeholder="Tulis komentar..." required maxlength="300">
+        <button type="submit" id="sendCommentBtn"></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Profil -->
+  <div id="profileModal" class="modal-overlay" style="display:none;">
+    <div class="profile-card">
+      <div class="upload-header">
+        <h2>Profil</h2>
+        <button id="closeProfileBtn" class="close-btn"></button>
+      </div>
+
+      <div class="profile-body">
+        <div class="profile-avatar-section">
+          <div class="profile-avatar-wrap" id="avatarClickArea">
+            <img id="profileAvatarImg" class="profile-avatar-img" style="display:none;">
+            <span id="profileAvatarFallback" class="profile-avatar-fallback"></span>
+            <div class="avatar-edit-badge" id="iconEditBadge"></div>
+            <input type="file" id="avatarInput" accept="image/*" style="display:none;">
+          </div>
+          <div class="profile-username-label" id="profileUsernameLabel"></div>
+        </div>
+
+        <div id="profileAlert" class="alert-box" style="display:none;"></div>
+
+        <form id="profileForm" class="profile-form">
+          <label class="profile-label">Nama Tampilan</label>
+          <input type="text" id="displayNameInput" maxlength="50" placeholder="Nama tampilan">
+
+          <label class="profile-label">Bio</label>
+          <textarea id="bioInput" maxlength="150" rows="3" placeholder="Ceritakan tentang dirimu..."></textarea>
+
+          <button type="submit" class="btn-primary">Simpan Perubahan</button>
+        </form>
+
+        <div class="profile-divider"></div>
+
+        <button id="switchAccountBtn" class="profile-action-btn">
+          <span id="iconSwitch"></span> Pindah Akun
+        </button>
+        <button id="logoutBtn" class="profile-action-btn danger">
+          <span id="iconLogout"></span> Keluar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Profil Publik (kunjungan ke profil user lain / diri sendiri via kartu) -->
+  <div id="publicProfileModal" class="modal-overlay" style="display:none;">
+    <div class="public-profile-card">
+      <div class="upload-header">
+        <button id="backFromPublicProfileBtn" class="close-btn" title="Kembali"></button>
+        <h2 id="publicProfileTitleUsername">Profil</h2>
+        <button id="closePublicProfileBtn" class="close-btn"></button>
+      </div>
+
+      <div class="public-profile-body" id="publicProfileBody">
+        <div class="profile-avatar-section">
+          <div class="profile-avatar-wrap no-edit">
+            <img id="ppAvatarImg" class="profile-avatar-img" style="display:none;">
+            <span id="ppAvatarFallback" class="profile-avatar-fallback"></span>
+          </div>
+          <div class="profile-username-label" id="ppUsernameLabel"></div>
+          <div class="pp-displayname" id="ppDisplayName"></div>
+        </div>
+
+        <div class="pp-stats-row">
+          <button class="pp-stat" id="ppArtworksStat">
+            <span class="pp-stat-num" id="ppArtworksCount">0</span>
+            <span class="pp-stat-label">Karya</span>
+          </button>
+          <button class="pp-stat" id="ppFollowersStat">
+            <span class="pp-stat-num" id="ppFollowersCount">0</span>
+            <span class="pp-stat-label">Pengikut</span>
+          </button>
+          <button class="pp-stat" id="ppFollowingStat">
+            <span class="pp-stat-num" id="ppFollowingCount">0</span>
+            <span class="pp-stat-label">Mengikuti</span>
+          </button>
+        </div>
+
+        <div class="pp-bio-box" id="ppBioBox" style="display:none;">
+          <span id="ppBioIcon"></span>
+          <span id="ppBioText"></span>
+        </div>
+
+        <div class="pp-joined" id="ppJoined"></div>
+
+        <button id="ppFollowBtn" class="btn-primary pp-follow-btn" style="display:none;"></button>
+
+        <div class="pp-section-title" id="ppArtworksSectionTitle">
+          <span id="iconGridPP"></span> Karya
+        </div>
+        <div class="pp-artwork-grid" id="ppArtworkGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Followers / Following list -->
+  <div id="followListModal" class="modal-overlay" style="display:none;">
+    <div class="comment-card">
+      <div class="upload-header">
+        <h2 id="followListTitle">Pengikut</h2>
+        <button id="closeFollowListBtn" class="close-btn"></button>
+      </div>
+      <div id="followListBody" class="comment-list follow-list-body"></div>
+    </div>
+  </div>
+
+  <!-- Modal Login/Register (muncul kalau belum login, tanpa redirect ke halaman terpisah) -->
+  <div id="authModal" class="modal-overlay" style="display:none;">
+    <div class="comment-card auth-card">
+      <div class="upload-header">
+        <span class="login-logo" id="authLogo"></span>
+        <button id="closeAuthBtn" class="close-btn"></button>
+      </div>
+
+      <div id="authLoginView">
+        <div id="alertBox" class="auth-alert" style="display:none;"></div>
+        <form class="login-form" id="loginForm">
+          <input type="text" id="username" placeholder="Username" autocomplete="username" required>
+          <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+          <button type="submit" class="btn-primary">Masuk</button>
+          <button type="button" class="btn-secondary" id="cancelLoginBtn">Batal, kembali ke beranda</button>
+        </form>
+        <div class="switch-line" style="margin-top:8px;">
+          <button id="showForgotBtn">Lupa password?</button>
+        </div>
+        <div class="switch-line">
+          Belum punya akun? <button id="showRegisterBtn">Daftar</button>
+        </div>
+      </div>
+
+      <div id="authRegisterView" style="display:none;">
+        <div id="regAlertBox" class="auth-alert" style="display:none;"></div>
+        <form class="login-form" id="registerForm">
+          <input type="text" id="regUsername" placeholder="Username (min. 3 karakter)" required>
+          <input type="email" id="regEmail" placeholder="Email aktif" required>
+          <input type="password" id="regPassword" placeholder="Password (min. 4 karakter)" required>
+          <button type="submit" class="btn-primary">Daftar</button>
+          <button type="button" class="btn-secondary" id="cancelRegisterBtn">Batal, kembali ke beranda</button>
+        </form>
+        <div class="switch-line">
+          Sudah punya akun? <button id="showLoginBtn">Masuk</button>
+        </div>
+      </div>
+
+      <!-- Lupa Password (3 tahap), dipakai kalau user klik "Lupa password?" di sini -->
+      <div id="authForgotView" style="display:none;">
+        <div id="forgotAlertBox" class="auth-alert" style="display:none;"></div>
+
+        <div id="forgotStep1">
+          <p style="font-size:13px; color:var(--text-dim,#6b7d94); margin:0 0 14px; text-align:center;">
+            Masukkan email yang terdaftar. Kami akan mengirim kode 6 digit.
+          </p>
+          <form class="login-form" id="forgotStep1Form">
+            <input type="email" id="forgotEmail" placeholder="Email terdaftar" required>
+            <button type="submit" class="btn-primary">Kirim Kode</button>
+          </form>
+        </div>
+
+        <div id="forgotStep2" style="display:none;">
+          <p style="font-size:13px; color:var(--text-dim,#6b7d94); margin:0 0 14px; text-align:center;">
+            Kode 6 digit dikirim ke <strong id="forgotEmailDisplay" style="color:var(--text,#dbe6f0);"></strong>. Berlaku 10 menit. dan cek folder spam
+          </p>
+          <form class="login-form" id="forgotStep2Form">
+            <input type="text" id="forgotCode" placeholder="Kode 6 digit" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required style="text-align:center; letter-spacing:6px; font-size:18px; font-weight:700;">
+            <button type="submit" class="btn-primary">Verifikasi Kode</button>
+            <button type="button" class="btn-secondary" id="forgotResendBtn">Kirim Ulang Kode</button>
+          </form>
+        </div>
+
+        <div id="forgotStep3" style="display:none;">
+          <p style="font-size:13px; color:var(--text-dim,#6b7d94); margin:0 0 14px; text-align:center;">
+            Kode terverifikasi. Buat password baru.
+          </p>
+          <form class="login-form" id="forgotStep3Form">
+            <input type="password" id="forgotNewPassword" placeholder="Password baru (min. 4 karakter)" required>
+            <button type="submit" class="btn-primary">Simpan Password Baru</button>
+          </form>
+        </div>
+
+        <div class="switch-line">
+          <button id="backToLoginFromForgotBtn">← Kembali ke halaman masuk</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/icons.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
